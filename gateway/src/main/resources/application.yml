@@ -1,0 +1,21 @@
+server:
+  port: 8765
+
+spring:
+  cloud:
+    gateway:
+      mvc:
+        routes:
+          - id: product-service
+            uri: lb://product-service
+            predicates:
+              - Path=/product-service/**
+
+
+  application:
+    name: BOARI-GATEWAY
+
+eureka:
+  client:
+    service-url:
+      defaultZone : http://localhost:8761/eureka/
