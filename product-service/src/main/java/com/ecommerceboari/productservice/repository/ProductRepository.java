@@ -1,6 +1,6 @@
 package com.ecommerceboari.productservice.repository;
 
-import com.ecommerceboari.productservice.model.Product;
+import com.ecommerceboari.productservice.entity.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

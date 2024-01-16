@@ -2,7 +2,7 @@ package com.ecommerceboari.productservice.service;
 
 import com.ecommerceboari.productservice.dto.BrandDTO;
 import com.ecommerceboari.productservice.exception.BadRequestException;
-import com.ecommerceboari.productservice.model.Brand;
+import com.ecommerceboari.productservice.entity.Brand;
 import com.ecommerceboari.productservice.repository.BrandRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;

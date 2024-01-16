@@ -2,7 +2,7 @@ package com.ecommerceboari.productservice.service;
 
 import com.ecommerceboari.productservice.dto.CategoryDTO;
 import com.ecommerceboari.productservice.exception.BadRequestException;
-import com.ecommerceboari.productservice.model.Category;
+import com.ecommerceboari.productservice.entity.Category;
 import com.ecommerceboari.productservice.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;

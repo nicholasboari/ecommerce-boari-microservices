@@ -4,7 +4,7 @@ import com.ecommerceboari.productservice.dto.BrandDTO;
 import com.ecommerceboari.productservice.dto.CategoryDTO;
 import com.ecommerceboari.productservice.dto.ProductDTO;
 import com.ecommerceboari.productservice.exception.BadRequestException;
-import com.ecommerceboari.productservice.model.Product;
+import com.ecommerceboari.productservice.entity.Product;
 import com.ecommerceboari.productservice.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;

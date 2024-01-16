@@ -1,6 +1,6 @@
 package com.ecommerceboari.productservice.repository;
 
-import com.ecommerceboari.productservice.model.Category;
+import com.ecommerceboari.productservice.entity.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

@@ -1,21 +1,39 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+
 server:
   port: 8765
 
 spring:
+  application:
+    name: api-gateway
+  h2:
+    console:
+      enabled: true
   cloud:
     gateway:
-      mvc:
-        routes:
-          - id: product-service
-            uri: lb://product-service
-            predicates:
-              - Path=/product-service/**
+      routes:
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/api/v1/users/*
+
+        - id: product-service
+          uri: lb://product-service
+          predicates:
+            - Path=/api/v1/products/*
 
 
-  application:
-    name: GATEWAY
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9090/realms/ecommerce-boari-realm
 
-eureka:
-  client:
-    service-url:
-      defaultZone : http://localhost:8761/eureka/
+jwt:
+  auth:
+    converter:
+      resource-id: auth-service
+      principle-attribute: preferred_username
