@@ -8,7 +8,6 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="product-service" />
-        <module name="user-service" />
         <module name="gateway" />
         <module name="service-registry" />
       </profile>
@@ -17,6 +16,7 @@
       <module name="authentication-service" target="21" />
       <module name="config-service" target="11" />
       <module name="keycloak-service" target="21" />
+      <module name="user-service" target="21" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

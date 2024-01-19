@@ -1,5 +1,6 @@
-package com.ecommerceboari.gateway.config;
+package com.ecommerceboari.gateway.security;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.NonNull;
@@ -13,9 +14,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtGra
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
-import java.util.Collection;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -36,9 +35,6 @@ public class JwtAuthConverter implements Converter<Jwt, Mono<? extends AbstractA
                         jwtGrantedAuthoritiesConverter.convert(jwt).stream(), extractResourceRoles(jwt)
                                 .stream())
                 .collect(Collectors.toSet());
-
-        System.out.println("Authenticated User: " + jwt.getSubject());
-        System.out.println("Authorities: " + authorities);
 
         return Mono.just(new JwtAuthenticationToken(jwt, authorities, getPrincipleClaimName(jwt)));
     }
