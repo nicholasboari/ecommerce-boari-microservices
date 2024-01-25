@@ -17,6 +17,10 @@ spring:
   sql:
     init:
       mode: always
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
 
 eureka:
   client:
@@ -25,3 +29,9 @@ eureka:
 
 spring.security.oauth2.resourceserver.jwt.issuer-uri: http://localhost:9090/realms/ecommerce-boari-realm
 spring.security.oauth2.resourceserver.jwt.jwk-set-uri: http://localhost:9090/realms/ecommerce-boari-realm/protocol/openid-connect/certs
+
+jwt:
+  auth:
+    converter:
+      resource-id: auth-service
+      principle-attribute: preferred_username
