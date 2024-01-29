@@ -29,6 +29,16 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/v1/products/**").hasRole("client_admin")
                         .requestMatchers(HttpMethod.PUT, "/api/v1/products/**").hasRole("client_admin")
                         .requestMatchers(HttpMethod.DELETE, "/api/v1/products/**").hasRole("client_admin")
+
+                        .requestMatchers(HttpMethod.GET, "/api/v1/brands/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/v1/brands/**").hasRole("client_admin")
+                        .requestMatchers(HttpMethod.PUT, "/api/v1/brands/**").hasRole("client_admin")
+                        .requestMatchers(HttpMethod.DELETE, "/api/v1/brands/**").hasRole("client_admin")
+
+                        .requestMatchers(HttpMethod.GET, "/api/v1/categories/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/v1/categories/**").hasRole("client_admin")
+                        .requestMatchers(HttpMethod.PUT, "/api/v1/categories/**").hasRole("client_admin")
+                        .requestMatchers(HttpMethod.DELETE, "/api/v1/categories/**").hasRole("client_admin")
                         .anyRequest().authenticated())
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(jwt -> jwt

@@ -21,4 +21,17 @@ public class ResourceExceptionHandler {
                 .build();
         return ResponseEntity.status(status).body(error);
     }
+
+    @ExceptionHandler(ConflictRequestException.class)
+    public ResponseEntity<StandardError> duplicate(ConflictRequestException e, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.CONFLICT;
+        StandardError error = StandardError.builder()
+                .message(e.getMessage())
+                .error("Conflict")
+                .path(request.getRequestURI())
+                .status(status.value())
+                .timestamp(System.currentTimeMillis())
+                .build();
+        return ResponseEntity.status(status).body(error);
+    }
 }

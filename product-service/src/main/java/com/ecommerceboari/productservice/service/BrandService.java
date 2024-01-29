@@ -3,6 +3,7 @@ package com.ecommerceboari.productservice.service;
 import com.ecommerceboari.productservice.dto.BrandDTO;
 import com.ecommerceboari.productservice.exception.BadRequestException;
 import com.ecommerceboari.productservice.entity.Brand;
+import com.ecommerceboari.productservice.exception.ConflictRequestException;
 import com.ecommerceboari.productservice.repository.BrandRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -47,7 +48,7 @@ public class BrandService {
     public BrandDTO save(BrandDTO brandDTO) {
         List<Brand> list = brandRepository.findByName(brandDTO.getName());
         if (!list.isEmpty()) {
-            throw new DataIntegrityViolationException("Brand name already exists!");
+            throw new ConflictRequestException("Brand name already exists!");
         }
 
         Brand brand = modelMapper.map(brandDTO, Brand.class);
