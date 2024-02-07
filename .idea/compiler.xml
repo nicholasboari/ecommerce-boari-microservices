@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="product-service" />
+        <module name="order-service" />
         <module name="gateway" />
         <module name="service-registry" />
       </profile>
@@ -24,6 +25,7 @@
       <module name="authentication-service" options="-parameters" />
       <module name="gateway" options="-parameters" />
       <module name="keycloak-service" options="-parameters" />
+      <module name="order-service" options="-parameters" />
       <module name="product-service" options="-parameters" />
       <module name="service-registry" options="-parameters" />
       <module name="user-service" options="-parameters" />
