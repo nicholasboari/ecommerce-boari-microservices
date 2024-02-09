@@ -51,7 +51,7 @@ public class ProductService {
                 .map(product -> modelMapper.map(product, ProductDTO.class));
     }
 
-    public ProductDTO findById(Long id) {
+    public ProductDTO findById(String id) {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new BadRequestException("Product not found!"));
         return modelMapper.map(product, ProductDTO.class);
@@ -77,7 +77,7 @@ public class ProductService {
     }
 
     @Transactional
-    public ProductDTO update(ProductDTO productDTO, Long id) {
+    public ProductDTO update(ProductDTO productDTO, String id) {
         findById(id);
         ProductDTO build = ProductDTO.builder().build();
 
@@ -88,7 +88,7 @@ public class ProductService {
     }
 
     @Transactional
-    public void delete(Long id) {
+    public void delete(String id) {
         productRepository.deleteById(id);
         logger.info("Object deleted from the database, ID: {}", id);
     }

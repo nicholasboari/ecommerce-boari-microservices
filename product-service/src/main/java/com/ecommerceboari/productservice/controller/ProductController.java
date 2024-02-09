@@ -23,10 +23,16 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping
-    public ResponseEntity<Page<ProductDTO>> findAllPaged(Pageable pageable) {
-        Page<ProductDTO> products = productService.findAllPaged(pageable);
-        LOGGER.info("Received request to fetch all products paginated");
-        return ResponseEntity.ok().body(products);
+    public ResponseEntity<?> findAllOrFindById(@RequestParam(required = false) String id, Pageable pageable) {
+        if (id != null) {
+            ProductDTO product = productService.findById(id);
+            LOGGER.info("Received request to fetch product by ID");
+            return ResponseEntity.ok().body(product);
+        } else {
+            Page<ProductDTO> products = productService.findAllPaged(pageable);
+            LOGGER.info("Received request to fetch all products paginated");
+            return ResponseEntity.ok().body(products);
+        }
     }
 
     @GetMapping("/all")
@@ -65,7 +71,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable String id) {
         productService.delete(id);
         LOGGER.info("Received request to update a new product");
         return ResponseEntity.status(HttpStatus.NO_CONTENT.value()).build();
