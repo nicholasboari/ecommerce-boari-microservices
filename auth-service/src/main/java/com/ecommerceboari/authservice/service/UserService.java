@@ -4,6 +4,8 @@ import com.ecommerceboari.authservice.dto.request.AuthRequestDTO;
 import com.ecommerceboari.authservice.dto.response.AuthResponseDTO;
 import com.ecommerceboari.authservice.entity.User;
 import com.ecommerceboari.authservice.entity.enums.Role;
+import com.ecommerceboari.authservice.exception.BadRequestException;
+import com.ecommerceboari.authservice.exception.ConflictRequestException;
 import com.ecommerceboari.authservice.jwt.JwtService;
 import com.ecommerceboari.authservice.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,19 +27,19 @@ public class UserService {
     private final ModelMapper modelMapper;
 
     public AuthResponseDTO login(AuthRequestDTO authRequestDTO) {
-        User user = userRepository.findByName(authRequestDTO.getName()).orElseThrow(() -> new RuntimeException("User not found"));
+        User user = userRepository.findByName(authRequestDTO.getName()).orElseThrow(() -> new BadRequestException("User not found"));
         String token = jwtService.generateToken(user);
         if (passwordEncoder.matches(CharBuffer.wrap(authRequestDTO.getPassword()), user.getPassword())) {
             AuthResponseDTO authResponseDTO = modelMapper.map(user, AuthResponseDTO.class);
             authResponseDTO.setToken(token);
             return authResponseDTO;
         }
-        throw new RuntimeException("Invalid password");
+        throw new BadRequestException("Invalid password");
     }
 
     public AuthResponseDTO register(AuthRequestDTO authRequestDTO) {
         Optional<User> optionalUser = userRepository.findByName(authRequestDTO.getName());
-        if (optionalUser.isPresent()) throw new RuntimeException("Login already exists");
+        if (optionalUser.isPresent()) throw new ConflictRequestException("Login already exists");
         User user = modelMapper.map(authRequestDTO, User.class);
         user.setPassword(passwordEncoder.encode(CharBuffer.wrap(authRequestDTO.getPassword())));
         user.setCreatedAt(Instant.now());
