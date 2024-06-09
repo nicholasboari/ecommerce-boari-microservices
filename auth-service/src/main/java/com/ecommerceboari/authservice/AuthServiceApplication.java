@@ -1,4 +1,4 @@
-package org.example.authservice;
+package com.ecommerceboari.authservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
