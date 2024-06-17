@@ -21,12 +21,14 @@ spring:
     console:
       enabled: true
       path: /h2-console
-
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka
-
-# the secret key must be longer than 32 bytes
-jwt:
-  secretKey: R2fCTQLWf1MH8mhl/7VibY7YuKEZ89PuQm2fk31/EWKWSi0Xi0Qu1f\VkAk1trJKO
+auth:
+  provided-uri: "http://localhost:8084"
+jks:
+  keypass: 123456
+  storepass: 123456
+  alias: product
+  path: keystore/product.jks

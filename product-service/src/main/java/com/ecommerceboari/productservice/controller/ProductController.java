@@ -9,9 +9,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 @RestController
@@ -28,11 +28,10 @@ public class ProductController {
             ProductDTO product = productService.findById(id);
             LOGGER.info("Received request to fetch product by ID");
             return ResponseEntity.ok().body(product);
-        } else {
-            Page<ProductDTO> products = productService.findAllPaged(pageable);
-            LOGGER.info("Received request to fetch all products paginated");
-            return ResponseEntity.ok().body(products);
         }
+        Page<ProductDTO> products = productService.findAllPaged(pageable);
+        LOGGER.info("Received request to fetch all products paginated");
+        return ResponseEntity.ok().body(products);
     }
 
     @GetMapping("/all")
